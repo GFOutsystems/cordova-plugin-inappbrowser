@@ -24,6 +24,7 @@ stages:
         - checkout: self
         - script: npm install
           workingDirectory: tests/ios
+        - script: xcversion simulators
         - task: Xcode@5
           inputs:
             actions: 'clean test'
