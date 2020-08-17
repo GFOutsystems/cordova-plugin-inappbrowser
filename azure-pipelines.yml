@@ -25,7 +25,7 @@ stages:
         - script: npm install
           workingDirectory: tests/ios
         - task: Xcode@5
-            inputs:
+          inputs:
               actions: 'build'
               sdk: '$(sdk)'
               scheme: '$(scheme)'
