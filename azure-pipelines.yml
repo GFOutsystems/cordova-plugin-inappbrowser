@@ -12,7 +12,7 @@ pool:
   vmImage: 'macOS'
 
 stages:
-  - stage: Prepare
+  - stage: Build
     jobs:
       - job: NPM
         displayName: 'npm install'
@@ -24,8 +24,6 @@ stages:
         - checkout: self
         - script: npm install
           workingDirectory: tests/ios
-  - stage: Build
-    jobs:
       - job: Build
         steps:
           - task: Xcode@5
