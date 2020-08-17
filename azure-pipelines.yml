@@ -26,4 +26,6 @@ stages:
             versionSpec: '10.x'
           displayName: 'Install Node.js'
         - checkout: self
-        - script: cd tests/ios & ls
+        - script: cd tests
+        - script: cd ios
+        - script: ls
