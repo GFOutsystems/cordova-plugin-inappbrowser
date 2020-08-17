@@ -24,7 +24,8 @@ stages:
         - checkout: self
         - script: npm install
           workingDirectory: tests/ios
-        - script: xcversion simulators
+        - script: xcversion simulators --install='iOS 13'
+        - script: xcrun simctl list --json
         - task: Xcode@5
           inputs:
             actions: 'clean test'
@@ -33,5 +34,5 @@ stages:
             xcWorkspacePath: '**/InAppBrowserTests/*.xcodeproj/project.xcworkspace'
             exportPath: '$(agent.buildDirectory)/output/$(sdk)/$(configuration)'
             packageApp: false
-            args: '-destination "platform=iOS Simulator,name=iPhone 8,OS=10.3"'
+            args: '-destination "platform=iOS Simulator,name=iPhone 8,OS=13.3"'
           
