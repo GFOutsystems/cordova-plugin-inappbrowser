@@ -31,7 +31,7 @@ stages:
             scheme: '$(scheme)'
             configuration: '$(configuration)'
             xcodeVersion: 'default' # Options: default, 10, 9, 8, specifyPath
-            xcWorkspacePath: 'test/ios/InAppBrowserTests/*.xcodeproj/project.xcworkspace'
+            xcWorkspacePath: '**/InAppBrowserTests/*.xcodeproj/project.xcworkspace'
             exportPath: '$(agent.buildDirectory)/output/$(sdk)/$(configuration)'
             packageApp: false
           
