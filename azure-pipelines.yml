@@ -8,22 +8,30 @@ variables:
   sdk: 'iphoneos'
   configuration: 'Debug'
 
-trigger:
-- master
-- pr
-
 pool:
   vmImage: 'macOS'
 
 stages:
-  - stage: Prepare
+  - stage: Test
     jobs:
-      - job: NPM
-        displayName: 'npm install'
+      - job: Test
+        displayName: 'Build'
         steps:
         - task: NodeTool@0
           inputs:
             versionSpec: '10.x'
           displayName: 'Install Node.js'
         - checkout: self
-        - script: cd tests
+        - script: npm install
+          workingDirectory: tests/ios
+        - task: Xcode@5
+          inputs:
+            actions: 'clean test'
+            sdk: '$(sdk)'
+            scheme: '$(scheme)'
+            configuration: '$(configuration)'
+            xcodeVersion: 'default' # Options: default, 10, 9, 8, specifyPath
+            xcWorkspacePath: '**/InAppBrowserTests/*.xcodeproj/project.xcworkspace'
+            exportPath: '$(agent.buildDirectory)/output/$(sdk)/$(configuration)'
+            packageApp: false
+          
