@@ -5,7 +5,6 @@
 
 variables:
   scheme: 'InAppBrowserTests'
-  sdk: 'iphonesimulator'
   configuration: 'Debug'
 
 pool:
@@ -27,7 +26,6 @@ stages:
         - task: Xcode@5
           inputs:
             actions: 'clean test'
-            sdk: '$(sdk)'
             scheme: '$(scheme)'
             configuration: '$(configuration)'
             xcodeVersion: 'default' # Options: default, 10, 9, 8, specifyPath
