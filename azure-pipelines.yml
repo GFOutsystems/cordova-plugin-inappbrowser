@@ -14,8 +14,8 @@ pool:
 stages:
   - stage: Build
     jobs:
-      - job: NPM
-        displayName: 'npm install'
+      - job: Build
+        displayName: 'Build'
         steps:
         - task: NodeTool@0
           inputs:
@@ -24,9 +24,7 @@ stages:
         - checkout: self
         - script: npm install
           workingDirectory: tests/ios
-      - job: Build
-        steps:
-          - task: Xcode@5
+        - task: Xcode@5
             inputs:
               actions: 'build'
               sdk: '$(sdk)'
@@ -36,3 +34,4 @@ stages:
               xcWorkspacePath: 'test/ios/InAppBrowserTests/*.xcodeproj/project.xcworkspace'
               exportPath: '$(agent.buildDirectory)/output/$(sdk)/$(configuration)'
               packageApp: false
+          
