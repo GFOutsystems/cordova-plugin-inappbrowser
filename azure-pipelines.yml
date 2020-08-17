@@ -3,19 +3,28 @@
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
+variables:
+  scheme: 'InAppBrowserTests'
+  sdk: 'iphoneos'
+  configuration: 'Debug'
+
 trigger:
 - master
+- pr
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'macOS 10.15.5'
 
-steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '10.x'
-  displayName: 'Install Node.js'
-
-- script: |
-    npm install
-    npm run build
-  displayName: 'npm install and build'
+stages:
+  - stage: Prepare plugin
+    jobs:
+      - job: NPM
+        displayName: 'npm install'
+        steps:
+        - task: NodeTool@0
+          inputs:
+            versionSpec: '10.x'
+          displayName: 'Install Node.js'
+        - script: |
+          cd tests/ios 
+          npm install
