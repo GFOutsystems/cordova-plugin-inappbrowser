@@ -5,7 +5,8 @@
 
 variables:
   scheme: 'InAppBrowserTests'
-  configuration: 'Debug'
+  SDK: 'iphonesimulator'
+  Configuration: 'Debug'
 
 pool:
   vmImage: 'macOS'
@@ -27,12 +28,9 @@ stages:
           inputs:
             actions: 'clean test'
             scheme: '$(scheme)'
-            configuration: '$(configuration)'
             xcodeVersion: 'default' # Options: default, 10, 9, 8, specifyPath
             xcWorkspacePath: '**/InAppBrowserTests/*.xcodeproj/project.xcworkspace'
             exportPath: '$(agent.buildDirectory)/output/$(sdk)/$(configuration)'
             packageApp: false
-            destinationTypeOption: 'simulators'
-            destinationPlatform: 'iOS'
-            destinationSimulators: 'iPhone 11'
+            args: '-destination platform=iOS Simulator,name=iPhone 7'
           
