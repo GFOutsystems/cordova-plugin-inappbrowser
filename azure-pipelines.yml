@@ -33,5 +33,5 @@ stages:
             xcWorkspacePath: '**/InAppBrowserTests/*.xcodeproj/project.xcworkspace'
             exportPath: '$(agent.buildDirectory)/output/$(sdk)/$(configuration)'
             packageApp: false
-            args: '-destination "platform=iOS Simulator"'
+            args: '-destination "platform=iOS Simulator,OS=10.3"'
           
