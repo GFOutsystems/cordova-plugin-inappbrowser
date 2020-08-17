@@ -12,9 +12,9 @@ pool:
   vmImage: 'macOS'
 
 stages:
-  - stage: Build
+  - stage: Test
     jobs:
-      - job: Build
+      - job: Test
         displayName: 'Build'
         steps:
         - task: NodeTool@0
@@ -26,7 +26,7 @@ stages:
           workingDirectory: tests/ios
         - task: Xcode@5
           inputs:
-            actions: 'build'
+            actions: 'clean test'
             sdk: '$(sdk)'
             scheme: '$(scheme)'
             configuration: '$(configuration)'
