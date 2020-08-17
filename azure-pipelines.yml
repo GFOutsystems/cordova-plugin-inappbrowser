@@ -16,7 +16,7 @@ pool:
   vmImage: 'macOS 10.15.5'
 
 stages:
-  - stage: Prepare plugin
+  - stage: Prepare
     jobs:
       - job: NPM
         displayName: 'npm install'
