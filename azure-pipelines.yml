@@ -8,10 +8,6 @@ variables:
   sdk: 'iphoneos'
   configuration: 'Debug'
 
-trigger:
-- master
-- pr
-
 pool:
   vmImage: 'macOS'
 
@@ -27,5 +23,4 @@ stages:
           displayName: 'Install Node.js'
         - checkout: self
         - script: cd tests
-        - script: cd ios
         - script: ls
