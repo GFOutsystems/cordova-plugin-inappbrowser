@@ -13,7 +13,7 @@ trigger:
 - pr
 
 pool:
-  vmImage: 'macOS 10.15'
+  vmImage: 'macOS'
 
 stages:
   - stage: Prepare
