@@ -24,8 +24,8 @@ stages:
         - checkout: self
         - script: npm install
           workingDirectory: tests/ios
-        - script: xcversion simulators --install='iOS 13'
-        - script: xcrun simctl list --json
+#        - script: xcversion simulators --install='iOS 13'
+        - script: xcrun simctl list
         - task: Xcode@5
           inputs:
             actions: 'clean test'
