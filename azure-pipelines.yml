@@ -24,7 +24,7 @@ stages:
         - checkout: self
         - script: npm install
           workingDirectory: tests/ios
-#        - script: xcversion simulators --install='iOS 13'
+        - script: xcversion simulators --install='iOS 13'
         - script: xcrun simctl create My-iPhone 11 com.apple.CoreSimulator.SimDeviceType.iPhone-11 com.apple.CoreSimulator.SimRuntime.iOS-13–3
         - task: Xcode@5
           inputs:
