@@ -11,6 +11,9 @@ variables:
 pool:
   vmImage: 'macOS'
 
+pr:
+ - master
+
 stages:
   - stage: Test
     jobs:
