@@ -1,0 +1,44 @@
+# Node.js
+# Build a general Node.js project with npm.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+variables:
+  scheme: 'InAppBrowserTests'
+  SDK: 'iphonesimulator'
+  Configuration: 'Debug'
+
+pool:
+  vmImage: 'macOS'
+
+pr:
+ - master
+
+stages:
+  - stage: Test
+    jobs:
+      - job: Test
+        displayName: 'Build'
+        steps:
+        - task: NodeTool@0
+          inputs:
+            versionSpec: '10.x'
+          displayName: 'Install Node.js'
+        - checkout: self
+        - script: npm install
+          workingDirectory: tests/ios
+#        - script: xcversion simulators --install='iOS 13'
+#        - script: xcrun simctl create My-iPhone 11 com.apple.CoreSimulator.SimDeviceType.iPhone-11 com.apple.CoreSimulator.SimRuntime.iOS-13–3
+        - task: Xcode@5
+          inputs:
+            actions: 'clean build test'
+            scheme: '$(scheme)'
+            xcodeVersion: 'default'
+            xcWorkspacePath: '**/InAppBrowserTests/*.xcodeproj/project.xcworkspace'
+            exportPath: '$(agent.buildDirectory)/output/$(sdk)/$(configuration)'
+            packageApp: false
+            destinationSimulators: iPhone 11
+            destinationPlatform: iOS
+            args: -destination "platform=iOS Simulator,name=iPhone 11"
+            useXcpretty: true
+            publishJUnitResults: true
