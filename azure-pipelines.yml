@@ -24,15 +24,16 @@ stages:
         - checkout: self
         - script: npm install
           workingDirectory: tests/ios
-        - script: xcversion simulators --install='iOS 13'
-        - script: xcrun simctl create My-iPhone 11 com.apple.CoreSimulator.SimDeviceType.iPhone-11 com.apple.CoreSimulator.SimRuntime.iOS-13–3
+#        - script: xcversion simulators --install='iOS 13'
+#        - script: xcrun simctl create My-iPhone 11 com.apple.CoreSimulator.SimDeviceType.iPhone-11 com.apple.CoreSimulator.SimRuntime.iOS-13–3
         - task: Xcode@5
           inputs:
             actions: 'clean test'
             scheme: '$(scheme)'
-            xcodeVersion: '11.6'
+            xcodeVersion: 'default'
             xcWorkspacePath: '**/InAppBrowserTests/*.xcodeproj/project.xcworkspace'
             exportPath: '$(agent.buildDirectory)/output/$(sdk)/$(configuration)'
             packageApp: false
-            args: '-destination "platform=iOS Simulator,name=My-iPhone 11,OS=13.3"'
+#            destinationSimulators: 
+#            args: '-destination "platform=iOS Simulator,name=My-iPhone 11,OS=13.3"'
           
