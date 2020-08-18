@@ -36,5 +36,5 @@ stages:
             packageApp: false
             destinationSimulators: iPhone 11
             destinationPlatform: iOS
-            args: -destination "platform=iOS Simulator,name=iPhone 11,OS=13.3"
+            args: -destination "platform=iOS Simulator,name=iPhone 11"
           
