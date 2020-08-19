@@ -1,8 +1,0 @@
-pr:
- - master
-
-stages:
-  - stage: Test
-    workingDirectory: '${System.DefaultWorkingDirectory}'
-    jobs:
-    - template: '${System.DefaultWorkingDirectory}/CI/templates/ios/test-job.yml'

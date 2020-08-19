@@ -1,7 +1,7 @@
 parameters:
 - name: workingDirectory # name of the parameter; required
   type: string # data type of the parameter; required
-  default: ${{ System.DefaultWorkingDirectory }}
+  default: ${System.DefaultWorkingDirectory}
 
 steps:
 - task: NodeTool@0

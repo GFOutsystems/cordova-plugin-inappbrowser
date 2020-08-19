@@ -27,8 +27,7 @@ jobs:
     pool:
       vmImage: 'macOS'
     steps:
-    - template: **/CI/templates/node/npm-steps.yml
-      workingDirectory: ${{ parameters.workingDirectory }}
+    - template: 'templates/node/npm-steps.yml'
     - task: Xcode@5
       inputs:
         ${{ if eq(parameters.shouldClean, true) }}:
