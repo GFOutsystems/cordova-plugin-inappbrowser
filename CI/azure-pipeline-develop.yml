@@ -9,4 +9,4 @@ pr:
 stages:
   - stage: Test
     jobs:
-      - template: 'templates/ios/test-job.yml'
+      - template: 'templates/test-job.yml'
