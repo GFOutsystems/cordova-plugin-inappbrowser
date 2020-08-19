@@ -10,7 +10,7 @@ parameters:
   default: default
 - name: workingDirectory
   type: string
-  default: ${System.DefaultWorkingDirectory}
+  default: ''
 - name: destinationPlatform
   type: string
   default: iOS Simulator
@@ -20,6 +20,9 @@ parameters:
 - name: shouldClean
   type: boolean
   default: true
+- name: sdk
+  type: string
+  default: 'iphonesimulator'
 
 jobs:
   - job: Test
@@ -27,7 +30,9 @@ jobs:
     pool:
       vmImage: 'macOS'
     steps:
-    - template: 'templates/node/npm-steps.yml'
+    - template: 'npm-steps.yml'
+      parameters:
+        workingDirectory: ${{ parameters.workingDirectory }}
     - task: Xcode@5
       inputs:
         ${{ if eq(parameters.shouldClean, true) }}:
@@ -35,13 +40,14 @@ jobs:
         ${{ if not(eq(parameters.shouldClean, true)) }}:
           actions: 'build test'
         scheme: '${{ parameters.scheme }}'
-        xcodeVersion: ${{ parameters.xcodeVersion }}
-        configuration: ${{ parameters.configuration }}
+        sdk: '${{ parameters.sdk }}'
+        xcodeVersion: '${{ parameters.xcodeVersion }}'
+        configuration: '${{ parameters.configuration }}'
         xcWorkspacePath: '${{ parameters.workingDirectory }}/**/*.xcodeproj/project.xcworkspace'
         exportPath: '$(agent.buildDirectory)/output/$(sdk)/$(configuration)'
         packageApp: false
-        destinationSimulators: ${{ parameters.destinationName }}
+        destinationSimulators: '${{ parameters.destinationName }}'
         destinationPlatform: iOS
-        args: -destination "platform="${{ parameters.destinationPlatform }}",name="${{ parameters.destinationName }}
+        args: -destination "platform=${{ parameters.destinationPlatform }},name=${{ parameters.destinationName }}"
         useXcpretty: true
         publishJUnitResults: true
