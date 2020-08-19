@@ -14,4 +14,4 @@ pr:
 stages:
   - stage: Test
     jobs:
-      - template: '*/CI/templates/ios/test-job.yml'
+      - template: */CI/templates/ios/test-job.yml
