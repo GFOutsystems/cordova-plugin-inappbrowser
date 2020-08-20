@@ -4,18 +4,14 @@ variables:
   platforms: ['ios', 'js']
   outsources: ['github', 'outsystems']
 
-name: 'Release'
+name: 'Staging'
 
 trigger:
-  tags:
-    include:
-    - '*'
+  - master
+  - outsystems
 
 stages:
   - template: 'templates/tests-stage.yml'
     parameters:
       platforms: $(variables.platforms)
   - template: 'templates/deploy-testenv-stage.yml' # Deployment Job to deploy code for UI Testing
-    parameters:
-      shouldRunTests: true
-      release: ['github', 'outsystems']

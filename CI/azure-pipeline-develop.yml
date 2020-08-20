@@ -1,14 +1,12 @@
-name: 'Develop Pipeline'
+name: 'Develop'
 pr:
-  autoCancel: false
+  autoCancel: true
   branches:
     include:
     - master
+    - outsystems
 
 stages:
-  - stage: Test
-    jobs:
-      - template: 'templates/ios-test-job.yml'
-        parameters:
-          scheme: 'InAppBrowserTests'
-          workingDirectory: 'tests/ios'
+- template: 'templates/tests-stage.yml'
+  parameters:
+    platforms: ['ios', 'js']
