@@ -1,4 +1,4 @@
-name: 'InAppBrowserPlugins'
+name: 'Develop Pipeline'
 pr:
   autoCancel: false
   branches:
